@@ -1,0 +1,14 @@
+by dg
+
+
+<p-fileUpload
+name="myfile[]"
+mode="basic"
+[customUpload]="true"
+[chooseLabel]="'CSV von Paypal'"
+accept=".csv"
+[maxFileSize]="1000000"
+(uploadHandler)="uploadBackground($event)"
+></p-fileUpload>
+
+{{ convertedcsv }}
