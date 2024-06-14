@@ -1,6 +1,7 @@
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -8,16 +9,16 @@ import { ToastModule } from 'primeng/toast';
 
 @Component({
   standalone: true,
-  imports: [ButtonModule, FileUploadModule, ToastModule, FormsModule],
+  imports: [ButtonModule, FileUploadModule, ToastModule, FormsModule, HttpClientModule],
   selector: 'cccsvtoodoo-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [MessageService],
+  providers: [MessageService, HttpClient],
 })
 export class AppComponent {
   title = 'cccsvtoodoo';
   convertedcsv: string[] = [];
-  constructor(private domSanitizer: DomSanitizer) {}
+  constructor(private domSanitizer: DomSanitizer) { }
 
   onUpload(event: any) {
     console.log(event);
@@ -44,7 +45,8 @@ export class AppComponent {
     const csv = atob(reader.result.split(',')[1]);
     console.log(csv);
 
-    this.convertedcsv = this.convertCSVTOOdooCSV(csv);
+    this.convertedcsv =
+      this.convertCSVTOOdooCSV(csv);
     this.downloadString('converted.csv', this.convertedcsv.join(''));
   }
 
@@ -54,25 +56,43 @@ export class AppComponent {
     return parseFloat(x).toFixed(2);
   }
 
+  sortByDate(alist: string[]) {
+    return alist.sort((a, b) => {
+      const x = new Date(a.split('","')[3]);
+      const y = new Date(b.split('","')[3]);
+      return x > y ? 1 : -1;
+    });
+  }
+
+
   convertCSVTOOdooCSV(acsv: string) {
     const lines = acsv.split('\n');
-    const result = [lines[1] + '\n'];
+    let result = [];
     for (let i = 2; i < lines.length; i++) {
       const line = lines[i];
       if (line) {
         const columns = line.split('","');
 
-        columns[1] = this.convColumntoFloat(columns[1]);
-        columns[9] = this.convColumntoFloat(columns[9]);
-        columns[11] = this.convColumntoFloat(columns[11]);
-        columns[13] = this.convColumntoFloat(columns[13]);
+        try {
+          columns[1] = this.convColumntoFloat(columns[1]);
+          // columns[9] = this.convColumntoFloat(columns[9]);
+          //          columns[11] = this.convColumntoFloat(columns[11]);
+          //          columns[13] = this.convColumntoFloat(columns[13]);
+        } catch (error) {
+          console.log('error', error);
+          console.log(i, line);
+          throw error;
+        }
+        const z = columns[3].split('.');
 
-        const z = columns[3].split('.').join('-')
-        columns[3] = z;
+
+
+        columns[3] = z[2] + '-' + z[1] + '-' + z[0];
         result.push(columns.join('","') + '\n');
       }
     }
 
+    result = [lines[1] + '\n', ...this.sortByDate(result)];
     return result;
   }
 

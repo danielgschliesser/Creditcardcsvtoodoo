@@ -58,11 +58,11 @@
       "e2e": [
         {
           "file": "e2e/.eslintrc.json",
-          "hash": "6465058199699877180"
+          "hash": "10587321922224419493"
         },
         {
           "file": "e2e/cypress.config.ts",
-          "hash": "15414076024138857470",
+          "hash": "10128070837426886452",
           "deps": [
             "npm:cypress",
             "npm:@nx/cypress"
@@ -70,88 +70,92 @@
         },
         {
           "file": "e2e/project.json",
-          "hash": "8537525039115666631"
+          "hash": "9994773281861841586"
         },
         {
           "file": "e2e/src/e2e/app.cy.ts",
-          "hash": "18174623915980708119"
+          "hash": "9527629615718574764"
         },
         {
           "file": "e2e/src/fixtures/example.json",
-          "hash": "11614668686582597233"
+          "hash": "17341819486505642070"
         },
         {
           "file": "e2e/src/support/app.po.ts",
-          "hash": "11157016311132186162"
+          "hash": "5364106453863571025"
         },
         {
           "file": "e2e/src/support/commands.ts",
-          "hash": "7314691991044890572"
+          "hash": "11031723810997510506"
         },
         {
           "file": "e2e/src/support/e2e.ts",
-          "hash": "3666078656922506009"
+          "hash": "15928825062325902088"
         },
         {
           "file": "e2e/tsconfig.json",
-          "hash": "8840892539443366491"
+          "hash": "6519160235246404907"
         }
       ],
       "cccsvtoodoo": [
         {
           "file": ".eslintignore",
-          "hash": "7663861978715868291"
+          "hash": "13404745306227114823"
         },
         {
           "file": ".eslintrc.json",
-          "hash": "4590195419907489899"
+          "hash": "5653881904534218367"
         },
         {
           "file": ".gitignore",
-          "hash": "2178144051909739023"
+          "hash": "5628738610252882264"
         },
         {
           "file": ".prettierignore",
-          "hash": "7848693104264504795"
+          "hash": "5519981940544710039"
         },
         {
           "file": ".prettierrc",
-          "hash": "16267754514737964994"
+          "hash": "6820402234827505055"
         },
         {
           "file": ".vscode/extensions.json",
-          "hash": "235626400633494639"
+          "hash": "13391140343975966684"
+        },
+        {
+          "file": "Dockerfile",
+          "hash": "3561303090561440285"
         },
         {
           "file": "README.md",
-          "hash": "7459764741661225843"
+          "hash": "7110519491654549948"
         },
         {
           "file": "jest.config.ts",
-          "hash": "4881830566724751208"
+          "hash": "8730518494609535956"
         },
         {
           "file": "jest.preset.js",
-          "hash": "9430166341120122740",
+          "hash": "7473220183190921152",
           "deps": [
             "npm:@nx/jest"
           ]
         },
         {
           "file": "migrations.json",
-          "hash": "11808048988789931554"
+          "hash": "8113586873003989402"
         },
         {
           "file": "nx.json",
-          "hash": "13895796730191477984"
+          "hash": "1903657089667684352"
         },
         {
           "file": "package-lock.json",
-          "hash": "10907736060874189085"
+          "hash": "1876189796364175032"
         },
         {
           "file": "package.json",
-          "hash": "10610241388043877266",
+          "hash": "8911387149645427973",
           "deps": [
             "npm:@angular/animations",
             "npm:@angular/common",
@@ -204,11 +208,11 @@
         },
         {
           "file": "project.json",
-          "hash": "10108392638376999218"
+          "hash": "4837807200453832695"
         },
         {
           "file": "src/app/app.component.html",
-          "hash": "5873342300094077426"
+          "hash": "8978688802697435281"
         },
         {
           "file": "src/app/app.component.scss",
@@ -216,15 +220,16 @@
         },
         {
           "file": "src/app/app.component.spec.ts",
-          "hash": "9806416197039672978",
+          "hash": "16068367419771138552",
           "deps": [
             "npm:@angular/core"
           ]
         },
         {
           "file": "src/app/app.component.ts",
-          "hash": "3282093647762360113",
+          "hash": "15142114129211994209",
           "deps": [
+            "npm:@angular/common",
             "npm:@angular/core",
             "npm:@angular/forms",
             "npm:@angular/platform-browser",
@@ -233,7 +238,7 @@
         },
         {
           "file": "src/app/app.config.ts",
-          "hash": "4654713333334825839",
+          "hash": "3783585127068517278",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/platform-browser"
@@ -249,60 +254,45 @@
         },
         {
           "file": "src/index.html",
-          "hash": "6331575483884804629"
+          "hash": "4088210472100912571"
         },
         {
           "file": "src/main.ts",
-          "hash": "13856503497470522412",
+          "hash": "6255543371616166500",
           "deps": [
             "npm:@angular/platform-browser"
           ]
         },
         {
           "file": "src/styles.scss",
-          "hash": "1841773259167378535"
+          "hash": "10493428958258359855"
         },
         {
           "file": "src/test-setup.ts",
-          "hash": "12935735732682149507",
+          "hash": "10765977267162271731",
           "deps": [
             "npm:jest-preset-angular"
           ]
         },
         {
           "file": "tsconfig.app.json",
-          "hash": "16616923596177837167"
+          "hash": "16864811146245124190"
         },
         {
           "file": "tsconfig.editor.json",
-          "hash": "17511610827034788226"
+          "hash": "6816855480324741077"
         },
         {
           "file": "tsconfig.json",
-          "hash": "10136736632143272046"
+          "hash": "2792161267549103356"
         },
         {
           "file": "tsconfig.spec.json",
-          "hash": "16287279946930924495"
+          "hash": "1293240435771606091"
         },
         {
-          "file": "NODE_M~1/nx/src/TASKS-~1/fork.js",
-          "hash": "7612735544873856743",
-          "deps": [
-            "npm:child_process",
-            "npm:path"
-          ]
-        },
-        {
-          "file": "NODE_M~1/nx/bin/run-executor.js",
-          "hash": "11098590799264319067",
-          "deps": [
-            "npm:fs"
-          ]
-        },
-        {
-          "file": "Dockerfile",
-          "hash": "3561303090561440285"
+          "file": "yarn.lock",
+          "hash": "13979654672520441890"
         }
       ]
     }
