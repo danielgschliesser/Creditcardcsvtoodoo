@@ -212,7 +212,7 @@
         },
         {
           "file": "src/app/app.component.html",
-          "hash": "8978688802697435281"
+          "hash": "17438508854176475666"
         },
         {
           "file": "src/app/app.component.scss",
@@ -227,7 +227,7 @@
         },
         {
           "file": "src/app/app.component.ts",
-          "hash": "15142114129211994209",
+          "hash": "3217835551365078277",
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",

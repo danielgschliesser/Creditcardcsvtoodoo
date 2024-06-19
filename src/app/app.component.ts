@@ -6,10 +6,13 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   standalone: true,
-  imports: [ButtonModule, FileUploadModule, ToastModule, FormsModule, HttpClientModule],
+  imports: [ButtonModule, FileUploadModule, ToastModule, FormsModule, HttpClientModule,
+    CheckboxModule
+  ],
   selector: 'cccsvtoodoo-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -18,6 +21,8 @@ import { ToastModule } from 'primeng/toast';
 export class AppComponent {
   title = 'cccsvtoodoo';
   convertedcsv: string[] = [];
+  saldo = false;
+
   constructor(private domSanitizer: DomSanitizer) { }
 
   onUpload(event: any) {
@@ -52,14 +57,21 @@ export class AppComponent {
 
   convColumntoFloat(acsv: string) {
     let x = acsv.replace(/"/g, '');
-    x = x.replace(/,/g, '.');
+    if (x.indexOf('.') >= 0) {
+      x = x.replace(/./g, '');
+    }
+    if (x.indexOf(',') >= 0) {
+      x = x.replace(/,/g, '.');
+    }
     return parseFloat(x).toFixed(2);
   }
 
   sortByDate(alist: string[]) {
     return alist.sort((a, b) => {
-      const x = new Date(a.split('","')[3]);
-      const y = new Date(b.split('","')[3]);
+      const aa = a.split('","');
+      const bb = b.split('","');
+      const x = new Date(aa[3] + ' ' + aa[4].replace('"', ''));
+      const y = new Date(bb[3] + ' ' + bb[4].replace('"', ''));
       return x > y ? 1 : -1;
     });
   }
@@ -68,7 +80,17 @@ export class AppComponent {
   convertCSVTOOdooCSV(acsv: string) {
     const lines = acsv.split('\n');
     let result = [];
-    for (let i = 2; i < lines.length; i++) {
+    let startline = 0;
+    if (lines[startline].indexOf('"SEP=,"') >= 0) {
+      startline += 1;
+    }
+    if (lines[startline].indexOf('"HAENLDERNAME-MERCHANT_NAME","') >= 0) {
+      startline += 1;
+    }
+
+
+
+    for (let i = startline; i < lines.length; i++) {
       const line = lines[i];
       if (line) {
         const columns = line.split('","');
@@ -87,12 +109,42 @@ export class AppComponent {
 
 
 
-        columns[3] = z[2] + '-' + z[1] + '-' + z[0];
+        columns[3] = z[2] + '-' + z[1] + '-' + z[0] + ' ';
         result.push(columns.join('","') + '\n');
       }
     }
 
-    result = [lines[1] + '\n', ...this.sortByDate(result)];
+    result = this.sortByDate(result);
+
+    if (this.saldo) {
+      let lastsaldo1 = -1;
+      let lastsaldo2 = -1;
+
+      for (let i = result.length - 1; i > 0; i--) {
+        const line = result[i];
+        if (line) {
+          const columns = line.split('","');
+          if (columns[0].indexOf('SALDOUEBERTRAG') >= 0) {
+            if (lastsaldo1 === -1) {
+              lastsaldo1 = i;
+            } else {
+              if (lastsaldo2 === -1) {
+                lastsaldo2 = i;
+              }
+            }
+          }
+        }
+      }
+
+      lastsaldo2 = Math.max(0, lastsaldo2);
+      const r2: any[] = [];
+
+      for (let i = lastsaldo2 + 1; i <= lastsaldo1; i++) {
+        r2.push(result[i]);
+      }
+      result = r2;
+    }
+    result = [lines[1] + '\n', ...result];
     return result;
   }
 

@@ -1,14 +1,18 @@
 by dg
 
-
+<p-checkbox
+  binary="true"
+  label="Bis zum letzten Saldoübertrag"
+  [(ngModel)]="saldo"
+></p-checkbox>
 <p-fileUpload
-name="myfile[]"
-mode="basic"
-[customUpload]="true"
-[chooseLabel]="'CSV von Paypal'"
-accept=".csv"
-[maxFileSize]="1000000"
-(uploadHandler)="uploadBackground($event)"
+  name="myfile[]"
+  mode="basic"
+  [customUpload]="true"
+  [chooseLabel]="'CSV von Paypal'"
+  accept=".csv"
+  [maxFileSize]="1000000"
+  (uploadHandler)="uploadBackground($event)"
 ></p-fileUpload>
 
 {{ convertedcsv }}
