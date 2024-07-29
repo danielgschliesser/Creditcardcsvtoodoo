@@ -125,7 +125,11 @@ export class AppComponent {
 
         columns[3] = z[2] + '-' + z[1] + '-' + z[0] + ' ';
         columns[columns.length - 1] = '"\n';
-        result.push('"' + columns.join('","'));
+        if (strings === '"') {
+          result.push(columns.join('","'));
+        } else {
+          result.push('"' + columns.join('","'));
+        }
       }
     }
 
