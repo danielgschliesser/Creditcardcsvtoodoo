@@ -56,14 +56,21 @@ export class AppComponent {
   }
 
   convColumntoFloat(acsv: string) {
-    let x = acsv.replace(/"/g, '');
-    if (x.indexOf('.') >= 0) {
-      x = x.replace(/./g, '');
+    try {
+      let x = acsv.replace(/"/g, '');
+      if (x.indexOf('.') >= 0) {
+        x = x.split('.').join('');
+      }
+      if (x.indexOf(',') >= 0) {
+        x = x.replace(/,/g, '.');
+      }
+      console.log(acsv, x);
+      return parseFloat(x).toFixed(2);
+    } catch (error) {
+      console.log('error', error);
+      console.log(acsv);
+      return '0';
     }
-    if (x.indexOf(',') >= 0) {
-      x = x.replace(/,/g, '.');
-    }
-    return parseFloat(x).toFixed(2);
   }
 
   sortByDate(alist: string[]) {
@@ -81,19 +88,26 @@ export class AppComponent {
     const lines = acsv.split('\n');
     let result = [];
     let startline = 0;
+    let sep = ';';
     if (lines[startline].indexOf('"SEP=,"') >= 0) {
       startline += 1;
+      sep = ',';
     }
-    if (lines[startline].indexOf('"HAENLDERNAME-MERCHANT_NAME","') >= 0) {
+    if (lines[startline].indexOf('HAENLDERNAME-MERCHANT_NAME') >= 0) {
       startline += 1;
     }
 
+    let strings = '';
+    if (lines[startline].indexOf('"') === 0) {
+      strings = '"'
+    }
 
 
     for (let i = startline; i < lines.length; i++) {
       const line = lines[i];
       if (line) {
-        const columns = line.split('","');
+
+        const columns = line.split(strings + sep + strings);
 
         try {
           columns[1] = this.convColumntoFloat(columns[1]);
@@ -105,12 +119,13 @@ export class AppComponent {
           console.log(i, line);
           throw error;
         }
-        const z = columns[3].split('.');
+        const z = columns[7].split('.');
 
 
 
         columns[3] = z[2] + '-' + z[1] + '-' + z[0] + ' ';
-        result.push(columns.join('","') + '\n');
+        columns[columns.length - 1] = '"\n';
+        result.push('"' + columns.join('","'));
       }
     }
 
@@ -137,14 +152,14 @@ export class AppComponent {
       }
 
       lastsaldo2 = Math.max(0, lastsaldo2);
-      const r2: any[] = [];
+      const r2: string[] = ['"HAENLDERNAME-MERCHANT_NAME","BETRAG-AMOUNT","WAEHRUNG-CURRENCY","DATUM-DATE","ZEIT-TIME","BRANCHE-CATEGORY","STATUS-STATUS","BUCHUNGSDATUM-POSTING_DATE","ORT-PLACE","BETRAG_OHNE_GEBUEHREN-AMOUNT_WITHOUT_FEES","WAEHRUNG_OHNE_GEBUEHREN-CURRENCY_WITHOUT_FEES","BETRAG_IN_FREMDWAEHRUNG-FOREIGN_AMOUNT","FREMDWAEHRUNG-FOREIGN_CURRENCY","BEARBEITUNGSENTGELT-FOREIGN_PROCESSING_FEE_AMOUNT","WAEHRUNG_BEARBEITUNGSENTGELT-FOREIGN_PROCESSING_FEE_CURRENCY","BARBEHEBUNGSENTGELT-CASH_WITHDRAWAL_FEE_AMOUNT","WAEHRUNG_BARBEHEBUNGSENTGELT-CASH_WITHDRAWAL_FEE_CURRENCY","KARTENNUMMER-CARD_NUMBER"\n'];
 
       for (let i = lastsaldo2 + 1; i <= lastsaldo1; i++) {
         r2.push(result[i]);
       }
       result = r2;
     }
-    result = [lines[1] + '\n', ...result];
+    //    result = [lines[1] + '\n', ...result];
     return result;
   }
 

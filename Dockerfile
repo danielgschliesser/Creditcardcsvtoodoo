@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM node:20 AS build
+FROM node:18.20.4-alpine3.20
 
 # Set the working directory
 WORKDIR /app
@@ -20,7 +20,7 @@ RUN npx nx build cccsvtoodoo --configuration=production
 FROM nginx:alpine
 
 # Copy the build output to replace the default nginx contents.
-COPY --from=build /app/dist/cccsvtoodoo /usr/share/nginx/html
+COPY /dist/cccsvtoodoo /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
