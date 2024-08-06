@@ -108,7 +108,7 @@
         },
         {
           "file": ".gitignore",
-          "hash": "5628738610252882264"
+          "hash": "14022795360766018715"
         },
         {
           "file": ".prettierignore",
@@ -123,8 +123,12 @@
           "hash": "13391140343975966684"
         },
         {
+          "file": ".vscode/launch.json",
+          "hash": "12530822538445862421"
+        },
+        {
           "file": "Dockerfile",
-          "hash": "3561303090561440285"
+          "hash": "7414139793406713548"
         },
         {
           "file": "README.md",
@@ -208,7 +212,7 @@
         },
         {
           "file": "project.json",
-          "hash": "4837807200453832695"
+          "hash": "16473236034221487038"
         },
         {
           "file": "src/app/app.component.html",
@@ -227,7 +231,7 @@
         },
         {
           "file": "src/app/app.component.ts",
-          "hash": "3217835551365078277",
+          "hash": "15890984536904718006",
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",

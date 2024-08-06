@@ -121,14 +121,14 @@ export class AppComponent {
         }
         const z = columns[7].split('.');
 
-
-
-        columns[3] = z[2] + '-' + z[1] + '-' + z[0] + ' ';
-        columns[columns.length - 1] = '"\n';
-        if (strings === '"') {
-          result.push(columns.join('","'));
-        } else {
-          result.push('"' + columns.join('","'));
+        if (z.length > 2) {
+          columns[3] = z[2] + '-' + z[1] + '-' + z[0] + ' ';
+          columns[columns.length - 1] = '"\n';
+          if (strings === '"') {
+            result.push(columns.join('","'));
+          } else {
+            result.push('"' + columns.join('","'));
+          }
         }
       }
     }

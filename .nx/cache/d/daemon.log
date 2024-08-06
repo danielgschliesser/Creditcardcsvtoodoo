@@ -1676,3 +1676,20 @@
 [NX Daemon Server] - 2024-06-19T14:53:21.729Z - Handled REQUEST_FILE_DATA. Handling time: 0. Response time: 0.
 [NX Daemon Server] - 2024-06-19T14:53:21.729Z - Closed a connection. Number of open connections: 2
 [NX Daemon Server] - 2024-06-19T14:54:21.202Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-07-29T11:44:57.726Z - Started listening on: \\.\pipe\nx\C:\Users\DANIEL~1.GSC\AppData\Local\Temp\bfcb7d4d3bf614c997a0\d.sock
+[NX Daemon Server] - 2024-07-29T11:44:57.730Z - [WATCHER]: Subscribed to changes within: c:\Users\daniel.gschliesser\repos\Creditcardcsvtoodoo (native)
+[NX Daemon Server] - 2024-07-29T11:44:57.733Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-29T11:44:57.735Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-07-29T11:44:57.736Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-07-29T11:44:57.738Z - [REQUEST]: Client Request for Project Graph Received
+[NX Daemon Server] - 2024-07-29T11:44:57.739Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-07-29T11:44:57.739Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-29T11:44:57.740Z - [REQUEST]: 
+[NX Daemon Server] - 2024-07-29T11:44:57.878Z - [REQUEST]: Responding to the client. project-graph
+[NX Daemon Server] - 2024-07-29T11:44:57.880Z - Time taken for 'total for creating and serializing project graph' 140.0454000234604ms
+[NX Daemon Server] - 2024-07-29T11:44:57.880Z - Done responding to the client project-graph
+[NX Daemon Server] - 2024-07-29T11:44:57.880Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 140. Response time: 2.
+[NX Daemon Server] - 2024-07-29T11:44:57.888Z - [REQUEST]: Responding to the client. handleRequestFileData
+[NX Daemon Server] - 2024-07-29T11:44:57.888Z - Done responding to the client handleRequestFileData
+[NX Daemon Server] - 2024-07-29T11:44:57.888Z - Handled REQUEST_FILE_DATA. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2024-07-29T11:44:57.890Z - Closed a connection. Number of open connections: 0

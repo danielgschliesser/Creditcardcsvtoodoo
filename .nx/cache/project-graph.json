@@ -189,6 +189,16 @@
               "buildTarget": "cccsvtoodoo:build"
             },
             "configurations": {}
+          },
+          "docker-build": {
+            "dependsOn": [
+              "build"
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "docker build -f Dockerfile . -t creditcardodoo"
+            },
+            "configurations": {}
           }
         },
         "$schema": "node_modules/nx/schemas/project-schema.json",
