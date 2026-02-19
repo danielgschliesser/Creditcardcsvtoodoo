@@ -1,4 +1,8 @@
-import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHandler,
+} from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
@@ -10,8 +14,13 @@ import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   standalone: true,
-  imports: [ButtonModule, FileUploadModule, ToastModule, FormsModule, HttpClientModule,
-    CheckboxModule
+  imports: [
+    ButtonModule,
+    FileUploadModule,
+    ToastModule,
+    FormsModule,
+    HttpClientModule,
+    CheckboxModule,
   ],
   selector: 'cccsvtoodoo-root',
   templateUrl: './app.component.html',
@@ -21,9 +30,9 @@ import { CheckboxModule } from 'primeng/checkbox';
 export class AppComponent {
   title = 'cccsvtoodoo';
   convertedcsv: string[] = [];
-  saldo = false;
+  saldo = true;
 
-  constructor(private domSanitizer: DomSanitizer) { }
+  constructor(private domSanitizer: DomSanitizer) {}
 
   onUpload(event: any) {
     console.log(event);
@@ -50,8 +59,10 @@ export class AppComponent {
     const csv = atob(reader.result.split(',')[1]);
     console.log(csv);
 
-    this.convertedcsv =
-      this.convertCSVTOOdooCSV(csv);
+    this.convertedcsv = this.convertCSVTOOdooCSV(csv);
+
+    // const convertedarray = this.convertedcsv.split('\n').map((x) => { return { useforexport : true, line: x} });
+
     this.downloadString('converted.csv', this.convertedcsv.join(''));
   }
 
@@ -83,10 +94,11 @@ export class AppComponent {
     });
   }
 
-
   convertCSVTOOdooCSV(acsv: string) {
-    const lines = acsv.split('\n');
+    let lines = acsv.split('\n');
     let result = [];
+
+    lines = lines.filter((x) => x.length > 0);
     let startline = 0;
     let sep = ';';
     if (lines[startline].indexOf('"SEP=,"') >= 0) {
@@ -99,14 +111,12 @@ export class AppComponent {
 
     let strings = '';
     if (lines[startline].indexOf('"') === 0) {
-      strings = '"'
+      strings = '"';
     }
-
 
     for (let i = startline; i < lines.length; i++) {
       const line = lines[i];
       if (line) {
-
         const columns = line.split(strings + sep + strings);
 
         try {
@@ -135,6 +145,12 @@ export class AppComponent {
 
     result = this.sortByDate(result);
 
+    // insert line at position 0 to result
+    result = [
+      '"HAENLDERNAME-MERCHANT_NAME","BETRAG-AMOUNT","WAEHRUNG-CURRENCY","DATUM-DATE","ZEIT-TIME","BRANCHE-CATEGORY","STATUS-STATUS","BUCHUNGSDATUM-POSTING_DATE","ORT-PLACE","BETRAG_OHNE_GEBUEHREN-AMOUNT_WITHOUT_FEES","WAEHRUNG_OHNE_GEBUEHREN-CURRENCY_WITHOUT_FEES","BETRAG_IN_FREMDWAEHRUNG-FOREIGN_AMOUNT","FREMDWAEHRUNG-FOREIGN_CURRENCY","BEARBEITUNGSENTGELT-FOREIGN_PROCESSING_FEE_AMOUNT","WAEHRUNG_BEARBEITUNGSENTGELT-FOREIGN_PROCESSING_FEE_CURRENCY","BARBEHEBUNGSENTGELT-CASH_WITHDRAWAL_FEE_AMOUNT","WAEHRUNG_BARBEHEBUNGSENTGELT-CASH_WITHDRAWAL_FEE_CURRENCY","KARTENNUMMER-CARD_NUMBER"\n',
+      ...result,
+    ];
+
     if (this.saldo) {
       let lastsaldo1 = -1;
       let lastsaldo2 = -1;
@@ -156,7 +172,9 @@ export class AppComponent {
       }
 
       lastsaldo2 = Math.max(0, lastsaldo2);
-      const r2: string[] = ['"HAENLDERNAME-MERCHANT_NAME","BETRAG-AMOUNT","WAEHRUNG-CURRENCY","DATUM-DATE","ZEIT-TIME","BRANCHE-CATEGORY","STATUS-STATUS","BUCHUNGSDATUM-POSTING_DATE","ORT-PLACE","BETRAG_OHNE_GEBUEHREN-AMOUNT_WITHOUT_FEES","WAEHRUNG_OHNE_GEBUEHREN-CURRENCY_WITHOUT_FEES","BETRAG_IN_FREMDWAEHRUNG-FOREIGN_AMOUNT","FREMDWAEHRUNG-FOREIGN_CURRENCY","BEARBEITUNGSENTGELT-FOREIGN_PROCESSING_FEE_AMOUNT","WAEHRUNG_BEARBEITUNGSENTGELT-FOREIGN_PROCESSING_FEE_CURRENCY","BARBEHEBUNGSENTGELT-CASH_WITHDRAWAL_FEE_AMOUNT","WAEHRUNG_BARBEHEBUNGSENTGELT-CASH_WITHDRAWAL_FEE_CURRENCY","KARTENNUMMER-CARD_NUMBER"\n'];
+      const r2: string[] = [
+        '"HAENLDERNAME-MERCHANT_NAME","BETRAG-AMOUNT","WAEHRUNG-CURRENCY","DATUM-DATE","ZEIT-TIME","BRANCHE-CATEGORY","STATUS-STATUS","BUCHUNGSDATUM-POSTING_DATE","ORT-PLACE","BETRAG_OHNE_GEBUEHREN-AMOUNT_WITHOUT_FEES","WAEHRUNG_OHNE_GEBUEHREN-CURRENCY_WITHOUT_FEES","BETRAG_IN_FREMDWAEHRUNG-FOREIGN_AMOUNT","FREMDWAEHRUNG-FOREIGN_CURRENCY","BEARBEITUNGSENTGELT-FOREIGN_PROCESSING_FEE_AMOUNT","WAEHRUNG_BEARBEITUNGSENTGELT-FOREIGN_PROCESSING_FEE_CURRENCY","BARBEHEBUNGSENTGELT-CASH_WITHDRAWAL_FEE_AMOUNT","WAEHRUNG_BARBEHEBUNGSENTGELT-CASH_WITHDRAWAL_FEE_CURRENCY","KARTENNUMMER-CARD_NUMBER"\n',
+      ];
 
       for (let i = lastsaldo2 + 1; i <= lastsaldo1; i++) {
         r2.push(result[i]);

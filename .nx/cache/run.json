@@ -1,8 +1,8 @@
 {
   "run": {
-    "command": "nx run build",
-    "startTime": "2024-03-21T12:10:19.315Z",
-    "endTime": "2024-03-21T12:11:06.225Z",
+    "command": "nx run cccsvtoodoo:build",
+    "startTime": "2025-05-22T05:41:41.435Z",
+    "endTime": "2025-05-22T05:41:54.713Z",
     "inner": false
   },
   "tasks": [
@@ -10,9 +10,9 @@
       "taskId": "cccsvtoodoo:build:production",
       "target": "build",
       "projectName": "cccsvtoodoo",
-      "hash": "18282671847125670921",
-      "startTime": "2024-03-21T12:10:19.331Z",
-      "endTime": "2024-03-21T12:11:06.223Z",
+      "hash": "14212659873032865004",
+      "startTime": "2025-05-22T05:41:42.239Z",
+      "endTime": "2025-05-22T05:41:54.713Z",
       "params": "",
       "cacheStatus": "cache-miss",
       "status": 0

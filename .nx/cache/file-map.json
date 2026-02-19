@@ -119,12 +119,8 @@
           "hash": "6820402234827505055"
         },
         {
-          "file": ".vscode/extensions.json",
-          "hash": "13391140343975966684"
-        },
-        {
           "file": ".vscode/launch.json",
-          "hash": "12530822538445862421"
+          "hash": "11709769269929457149"
         },
         {
           "file": "Dockerfile",
@@ -231,7 +227,7 @@
         },
         {
           "file": "src/app/app.component.ts",
-          "hash": "15890984536904718006",
+          "hash": "16708391702090580015",
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",
@@ -297,6 +293,10 @@
         {
           "file": "yarn.lock",
           "hash": "13979654672520441890"
+        },
+        {
+          "file": ".nx/cache/d/server-process.json",
+          "hash": "18444763887495090535"
         }
       ]
     }
